@@ -1,0 +1,441 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1749B7322D851C18001F5673 /* AnimatedImageConverterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B7272D851C18001F5673 /* AnimatedImageConverterApp.swift */; };
+		1749B7332D851C18001F5673 /* SourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B7212D851C18001F5673 /* SourceType.swift */; };
+		1749B7342D851C18001F5673 /* ItemWrapperIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B7302D851C18001F5673 /* ItemWrapperIdentifier.swift */; };
+		1749B7352D851C18001F5673 /* APNGFileWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B71D2D851C18001F5673 /* APNGFileWrapper.swift */; };
+		1749B7362D851C18001F5673 /* HEICModifierError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B72C2D851C18001F5673 /* HEICModifierError.swift */; };
+		1749B7372D851C18001F5673 /* WebPFileWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B7222D851C18001F5673 /* WebPFileWrapper.swift */; };
+		1749B7382D851C18001F5673 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B7292D851C18001F5673 /* ContentView.swift */; };
+		1749B7392D851C18001F5673 /* AnimatedImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B71A2D851C18001F5673 /* AnimatedImageItem.swift */; };
+		1749B73A2D851C18001F5673 /* AnimatedType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B71C2D851C18001F5673 /* AnimatedType.swift */; };
+		1749B73B2D851C18001F5673 /* GIFFileWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B71F2D851C18001F5673 /* GIFFileWrapper.swift */; };
+		1749B73C2D851C18001F5673 /* AVISFileWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B71E2D851C18001F5673 /* AVISFileWrapper.swift */; };
+		1749B73D2D851C18001F5673 /* AnimatedImageImportable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B7192D851C18001F5673 /* AnimatedImageImportable.swift */; };
+		1749B73E2D851C18001F5673 /* ImageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B72E2D851C18001F5673 /* ImageInputView.swift */; };
+		1749B73F2D851C18001F5673 /* InfiniteAnimationImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B72F2D851C18001F5673 /* InfiniteAnimationImageView.swift */; };
+		1749B7402D851C18001F5673 /* AnimatedImageItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B71B2D851C18001F5673 /* AnimatedImageItemProtocol.swift */; };
+		1749B7412D851C18001F5673 /* DetailSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B72A2D851C18001F5673 /* DetailSheetView.swift */; };
+		1749B7422D851C18001F5673 /* ExportAnimatedImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B72B2D851C18001F5673 /* ExportAnimatedImageModifier.swift */; };
+		1749B7432D851C18001F5673 /* ImageDropError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B72D2D851C18001F5673 /* ImageDropError.swift */; };
+		1749B7442D851C18001F5673 /* HEICSFileWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B7202D851C18001F5673 /* HEICSFileWrapper.swift */; };
+		1749B7452D851C18001F5673 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1749B7242D851C18001F5673 /* Preview Assets.xcassets */; };
+		1749B7462D851C18001F5673 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1749B7282D851C18001F5673 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1749B6DA2D8519D8001F5673 /* MacAnimatedImageConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacAnimatedImageConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1749B7192D851C18001F5673 /* AnimatedImageImportable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedImageImportable.swift; sourceTree = "<group>"; };
+		1749B71A2D851C18001F5673 /* AnimatedImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedImageItem.swift; sourceTree = "<group>"; };
+		1749B71B2D851C18001F5673 /* AnimatedImageItemProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedImageItemProtocol.swift; sourceTree = "<group>"; };
+		1749B71C2D851C18001F5673 /* AnimatedType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedType.swift; sourceTree = "<group>"; };
+		1749B71D2D851C18001F5673 /* APNGFileWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNGFileWrapper.swift; sourceTree = "<group>"; };
+		1749B71E2D851C18001F5673 /* AVISFileWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVISFileWrapper.swift; sourceTree = "<group>"; };
+		1749B71F2D851C18001F5673 /* GIFFileWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFFileWrapper.swift; sourceTree = "<group>"; };
+		1749B7202D851C18001F5673 /* HEICSFileWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HEICSFileWrapper.swift; sourceTree = "<group>"; };
+		1749B7212D851C18001F5673 /* SourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceType.swift; sourceTree = "<group>"; };
+		1749B7222D851C18001F5673 /* WebPFileWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPFileWrapper.swift; sourceTree = "<group>"; };
+		1749B7242D851C18001F5673 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1749B7262D851C18001F5673 /* AnimatedImageConverter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AnimatedImageConverter.entitlements; sourceTree = "<group>"; };
+		1749B7272D851C18001F5673 /* AnimatedImageConverterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedImageConverterApp.swift; sourceTree = "<group>"; };
+		1749B7282D851C18001F5673 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1749B7292D851C18001F5673 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1749B72A2D851C18001F5673 /* DetailSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSheetView.swift; sourceTree = "<group>"; };
+		1749B72B2D851C18001F5673 /* ExportAnimatedImageModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportAnimatedImageModifier.swift; sourceTree = "<group>"; };
+		1749B72C2D851C18001F5673 /* HEICModifierError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HEICModifierError.swift; sourceTree = "<group>"; };
+		1749B72D2D851C18001F5673 /* ImageDropError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDropError.swift; sourceTree = "<group>"; };
+		1749B72E2D851C18001F5673 /* ImageInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInputView.swift; sourceTree = "<group>"; };
+		1749B72F2D851C18001F5673 /* InfiniteAnimationImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteAnimationImageView.swift; sourceTree = "<group>"; };
+		1749B7302D851C18001F5673 /* ItemWrapperIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemWrapperIdentifier.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1749B6D72D8519D8001F5673 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1749B6D12D8519D8001F5673 = {
+			isa = PBXGroup;
+			children = (
+				1749B7312D851C18001F5673 /* MacAnimatedImageConverter */,
+				1749B6DB2D8519D8001F5673 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1749B6DB2D8519D8001F5673 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1749B6DA2D8519D8001F5673 /* MacAnimatedImageConverter.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1749B7232D851C18001F5673 /* AnimatedImages */ = {
+			isa = PBXGroup;
+			children = (
+				1749B7192D851C18001F5673 /* AnimatedImageImportable.swift */,
+				1749B71A2D851C18001F5673 /* AnimatedImageItem.swift */,
+				1749B71B2D851C18001F5673 /* AnimatedImageItemProtocol.swift */,
+				1749B71C2D851C18001F5673 /* AnimatedType.swift */,
+				1749B71D2D851C18001F5673 /* APNGFileWrapper.swift */,
+				1749B71E2D851C18001F5673 /* AVISFileWrapper.swift */,
+				1749B71F2D851C18001F5673 /* GIFFileWrapper.swift */,
+				1749B7202D851C18001F5673 /* HEICSFileWrapper.swift */,
+				1749B7212D851C18001F5673 /* SourceType.swift */,
+				1749B7222D851C18001F5673 /* WebPFileWrapper.swift */,
+			);
+			path = AnimatedImages;
+			sourceTree = "<group>";
+		};
+		1749B7252D851C18001F5673 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1749B7242D851C18001F5673 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1749B7312D851C18001F5673 /* MacAnimatedImageConverter */ = {
+			isa = PBXGroup;
+			children = (
+				1749B7232D851C18001F5673 /* AnimatedImages */,
+				1749B7252D851C18001F5673 /* Preview Content */,
+				1749B7262D851C18001F5673 /* AnimatedImageConverter.entitlements */,
+				1749B7272D851C18001F5673 /* AnimatedImageConverterApp.swift */,
+				1749B7282D851C18001F5673 /* Assets.xcassets */,
+				1749B7292D851C18001F5673 /* ContentView.swift */,
+				1749B72A2D851C18001F5673 /* DetailSheetView.swift */,
+				1749B72B2D851C18001F5673 /* ExportAnimatedImageModifier.swift */,
+				1749B72C2D851C18001F5673 /* HEICModifierError.swift */,
+				1749B72D2D851C18001F5673 /* ImageDropError.swift */,
+				1749B72E2D851C18001F5673 /* ImageInputView.swift */,
+				1749B72F2D851C18001F5673 /* InfiniteAnimationImageView.swift */,
+				1749B7302D851C18001F5673 /* ItemWrapperIdentifier.swift */,
+			);
+			path = MacAnimatedImageConverter;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1749B6D92D8519D8001F5673 /* MacAnimatedImageConverter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1749B6E92D8519DA001F5673 /* Build configuration list for PBXNativeTarget "MacAnimatedImageConverter" */;
+			buildPhases = (
+				1749B6D62D8519D8001F5673 /* Sources */,
+				1749B6D72D8519D8001F5673 /* Frameworks */,
+				1749B6D82D8519D8001F5673 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MacAnimatedImageConverter;
+			packageProductDependencies = (
+			);
+			productName = AnimatedImageConverter;
+			productReference = 1749B6DA2D8519D8001F5673 /* MacAnimatedImageConverter.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1749B6D22D8519D8001F5673 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					1749B6D92D8519D8001F5673 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+				};
+			};
+			buildConfigurationList = 1749B6D52D8519D8001F5673 /* Build configuration list for PBXProject "MacAnimatedImageConverter" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1749B6D12D8519D8001F5673;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 1749B6DB2D8519D8001F5673 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1749B6D92D8519D8001F5673 /* MacAnimatedImageConverter */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1749B6D82D8519D8001F5673 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1749B7452D851C18001F5673 /* Preview Assets.xcassets in Resources */,
+				1749B7462D851C18001F5673 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1749B6D62D8519D8001F5673 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1749B7322D851C18001F5673 /* AnimatedImageConverterApp.swift in Sources */,
+				1749B7332D851C18001F5673 /* SourceType.swift in Sources */,
+				1749B7342D851C18001F5673 /* ItemWrapperIdentifier.swift in Sources */,
+				1749B7352D851C18001F5673 /* APNGFileWrapper.swift in Sources */,
+				1749B7362D851C18001F5673 /* HEICModifierError.swift in Sources */,
+				1749B7372D851C18001F5673 /* WebPFileWrapper.swift in Sources */,
+				1749B7382D851C18001F5673 /* ContentView.swift in Sources */,
+				1749B7392D851C18001F5673 /* AnimatedImageItem.swift in Sources */,
+				1749B73A2D851C18001F5673 /* AnimatedType.swift in Sources */,
+				1749B73B2D851C18001F5673 /* GIFFileWrapper.swift in Sources */,
+				1749B73C2D851C18001F5673 /* AVISFileWrapper.swift in Sources */,
+				1749B73D2D851C18001F5673 /* AnimatedImageImportable.swift in Sources */,
+				1749B73E2D851C18001F5673 /* ImageInputView.swift in Sources */,
+				1749B73F2D851C18001F5673 /* InfiniteAnimationImageView.swift in Sources */,
+				1749B7402D851C18001F5673 /* AnimatedImageItemProtocol.swift in Sources */,
+				1749B7412D851C18001F5673 /* DetailSheetView.swift in Sources */,
+				1749B7422D851C18001F5673 /* ExportAnimatedImageModifier.swift in Sources */,
+				1749B7432D851C18001F5673 /* ImageDropError.swift in Sources */,
+				1749B7442D851C18001F5673 /* HEICSFileWrapper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1749B6E72D8519DA001F5673 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1749B6E82D8519DA001F5673 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		1749B6EA2D8519DA001F5673 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MacAnimatedImageConverter/AnimatedImageConverter.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"AnimatedImageConverter/Preview Content\"";
+				DEVELOPMENT_TEAM = LK6FRFG3P9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MacAnimatedImageConverter/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 18;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.whatever.asdfas.AnimatedImageConverter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 1;
+			};
+			name = Debug;
+		};
+		1749B6EB2D8519DA001F5673 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MacAnimatedImageConverter/AnimatedImageConverter.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"AnimatedImageConverter/Preview Content\"";
+				DEVELOPMENT_TEAM = LK6FRFG3P9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MacAnimatedImageConverter/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 18;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.whatever.asdfas.AnimatedImageConverter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1749B6D52D8519D8001F5673 /* Build configuration list for PBXProject "MacAnimatedImageConverter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1749B6E72D8519DA001F5673 /* Debug */,
+				1749B6E82D8519DA001F5673 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1749B6E92D8519DA001F5673 /* Build configuration list for PBXNativeTarget "MacAnimatedImageConverter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1749B6EA2D8519DA001F5673 /* Debug */,
+				1749B6EB2D8519DA001F5673 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1749B6D22D8519D8001F5673 /* Project object */;
+}
