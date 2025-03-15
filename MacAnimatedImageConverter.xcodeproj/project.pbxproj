@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		172355A32D855E0700E8A056 /* ZoomableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172355A22D855E0700E8A056 /* ZoomableModifier.swift */; };
+		172355A62D8564A100E8A056 /* SDWebImageWebPCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 172355A52D8564A100E8A056 /* SDWebImageWebPCoder */; };
 		1749B7322D851C18001F5673 /* AnimatedImageConverterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B7272D851C18001F5673 /* AnimatedImageConverterApp.swift */; };
 		1749B7332D851C18001F5673 /* SourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B7212D851C18001F5673 /* SourceType.swift */; };
 		1749B7342D851C18001F5673 /* ItemWrapperIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B7302D851C18001F5673 /* ItemWrapperIdentifier.swift */; };
@@ -63,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				172355A62D8564A100E8A056 /* SDWebImageWebPCoder in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +150,7 @@
 			);
 			name = MacAnimatedImageConverter;
 			packageProductDependencies = (
+				172355A52D8564A100E8A056 /* SDWebImageWebPCoder */,
 			);
 			productName = AnimatedImageConverter;
 			productReference = 1749B6DA2D8519D8001F5673 /* MacAnimatedImageConverter.app */;
@@ -177,6 +180,9 @@
 			);
 			mainGroup = 1749B6D12D8519D8001F5673;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				172355A42D8564A100E8A056 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1749B6DB2D8519D8001F5673 /* Products */;
 			projectDirPath = "";
@@ -438,6 +444,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		172355A42D8564A100E8A056 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageWebPCoder.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.14.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		172355A52D8564A100E8A056 /* SDWebImageWebPCoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 172355A42D8564A100E8A056 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */;
+			productName = SDWebImageWebPCoder;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1749B6D22D8519D8001F5673 /* Project object */;
 }

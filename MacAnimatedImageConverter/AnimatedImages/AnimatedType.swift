@@ -31,4 +31,20 @@ enum AnimatedType:Hashable {
             return .init("public.avif")!
         }
     }
+    
+    
+    var propKey:String {
+        switch self {
+        case .heics:
+            return kCGImagePropertyHEICSDictionary as String
+        case .apng:
+            return kCGImagePropertyPNGDictionary as String
+        case .gif:
+            return kCGImagePropertyGIFDictionary as String
+        case .webp:
+            return kCGImagePropertyWebPDictionary as String
+        case .avif:
+            return kCGImagePropertyAVISDictionary as String
+        }
+    }
 }

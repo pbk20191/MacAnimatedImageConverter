@@ -13,7 +13,8 @@ import UniformTypeIdentifiers
 import AppKit
 import AVFoundation
 import Combine
-
+import SDWebImageWebPCoder
+import SDWebImage
 
 struct ImageDropView: View {
     @State private var image: AnimatedImageImportable? = nil
@@ -25,9 +26,10 @@ struct ImageDropView: View {
     @State private var destinationIdentifer:UTType? = nil
     @State private var processing = false
     @State private var model = SharedModel()
+    @Environment(\.displayScale) private var displayScale
     
     let destinationTypes:[UTType] = [
-        .heics, .png, .gif
+        .heics, .png, .gif, .webP
     ]
     
     var body: some View {
@@ -105,11 +107,13 @@ struct ImageDropView: View {
                         .heics
                     case .webP:
                         .webp
+                    case .init("public.avif")!:
+                            .avif
                     default:
                         nil
                     }
                     guard let exportAs else { return }
-                    Task.detached {
+                    Task.detached { [displayScale] in
                         await MainActor.run {
                             processing = true
                         }
@@ -122,14 +126,25 @@ struct ImageDropView: View {
                             case .url(let uRL):
                                 imageSource = CGImageSourceCreateWithURL(uRL as CFURL, nil)
                             }
-                            
-                            let data = try transformToHEICS(
-                                cicontext: cicontext,
-                                imageSource: imageSource!,
-                                memoryPool: memoryPool,
-                                lossyCompressionQuality: lossy,
-                                to: uttype.identifier
-                            )
+                            let data:Data? = if exportAs == .webp {
+                                SDImageCodersManager.shared.encodedData(
+                                    with: parseImageToFrame(imageSource!, displayScale, image.animatedType.propKey),
+                                    loopCount: 0,
+                                    format: .webP,
+                                    options: [.encodeCompressionQuality: lossy]
+                                )
+                            } else {
+                                try transformToHEICS(
+                                    cicontext: cicontext,
+                                    imageSource: imageSource!,
+                                    memoryPool: memoryPool,
+                                    lossyCompressionQuality: lossy,
+                                    to: uttype.identifier
+                                )
+                            }
+                            guard let data else {
+                                throw CocoaError.init(.fileReadCorruptFile, userInfo: [:])
+                            }
                             
                             await MainActor.run {
                                 self.outputDetailItem = .init(item: .init(content: .data(data), animatedType: exportAs))
@@ -220,4 +235,17 @@ class SharedModel {
         )
         self.memoryPool = CMMemoryPoolCreate(options: nil)
     }
+}
+
+
+func parseImageToFrame(_ source:CGImageSource,_ scale:CGFloat, _ key:String) -> [SDImageFrame] {
+    var buffer = [SDImageFrame]()
+    for i in 0..<CGImageSourceGetCount(source) {
+        let image = CGImageSourceCreateImageAtIndex(source, i, nil)!
+        let prop = CGImageSourceCopyPropertiesAtIndex(source, i, nil) as! [String:Any]
+        let imageProp = prop[key] as! [String:Any]
+        let duration = imageProp["UnclampedDelayTime"] as? Double ?? imageProp["DelayTime"] as? Double
+        buffer.append(.init(image: .init(cgImage: image, scale: scale, orientation: .up), duration: duration ?? 0.1))
+    }
+    return buffer
 }

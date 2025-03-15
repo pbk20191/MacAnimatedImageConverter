@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageWebPCoder
 
 @main
 struct AnimatedImageConverterApp: App {
@@ -14,4 +15,11 @@ struct AnimatedImageConverterApp: App {
             ImageDropView()
         }
     }
+    
+    init () {
+        
+        SDImageCodersManager.shared.addCoder(SDImageWebPCoder.shared)
+        SDImageCodersManager.shared.addCoder(SDImageAWebPCoder.shared)
+    }
+    
 }
