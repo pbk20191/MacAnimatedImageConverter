@@ -11,7 +11,7 @@ import SwiftUI
 struct AnimatedImageConverterApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ImageDropView()
         }
     }
 }
