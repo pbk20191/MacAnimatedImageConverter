@@ -11,7 +11,13 @@ struct DetailSheetView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.displayScale) private var displayScale
-    @GestureState private var magnifyBy = 1.0
+    @GestureState private var magnifyBy = MagnifyData()
+    
+    struct MagnifyData {
+        
+        var scale = 1.0 as CGFloat
+        var point = UnitPoint.center
+    }
     
     @State private var dragExportEnabled = true
     var item:AnimatedImageImportable
@@ -34,23 +40,11 @@ struct DetailSheetView: View {
                         .fixedSize()
                 }
             }
-            .scaleEffect(magnifyBy)
-
+            .zoomable(isEnabled: !dragExportEnabled)
             .overlay {
-                if !dragExportEnabled {
+                if  dragExportEnabled {
                     Color.white.opacity(0.01)
                         .contentShape(Rectangle())
-
-                        .gesture(
-                            MagnifyGesture()
-                                .updating($magnifyBy) { value, state, transaction in
-                                    state = value.magnification
-                                }
-                        )
-                } else {
-                    Color.white.opacity(0.01)
-                        .contentShape(Rectangle())
-
                         .modifier(ExportAnimatedImageModifier(item: item))
                 }
                 

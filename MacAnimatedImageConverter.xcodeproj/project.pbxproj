@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		172355A32D855E0700E8A056 /* ZoomableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172355A22D855E0700E8A056 /* ZoomableModifier.swift */; };
 		1749B7322D851C18001F5673 /* AnimatedImageConverterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B7272D851C18001F5673 /* AnimatedImageConverterApp.swift */; };
 		1749B7332D851C18001F5673 /* SourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B7212D851C18001F5673 /* SourceType.swift */; };
 		1749B7342D851C18001F5673 /* ItemWrapperIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B7302D851C18001F5673 /* ItemWrapperIdentifier.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		172355A22D855E0700E8A056 /* ZoomableModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableModifier.swift; sourceTree = "<group>"; };
 		1749B6DA2D8519D8001F5673 /* MacAnimatedImageConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacAnimatedImageConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1749B7192D851C18001F5673 /* AnimatedImageImportable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedImageImportable.swift; sourceTree = "<group>"; };
 		1749B71A2D851C18001F5673 /* AnimatedImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedImageItem.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				1749B7272D851C18001F5673 /* AnimatedImageConverterApp.swift */,
 				1749B7282D851C18001F5673 /* Assets.xcassets */,
 				1749B7292D851C18001F5673 /* ContentView.swift */,
+				172355A22D855E0700E8A056 /* ZoomableModifier.swift */,
 				1749B72A2D851C18001F5673 /* DetailSheetView.swift */,
 				1749B72B2D851C18001F5673 /* ExportAnimatedImageModifier.swift */,
 				1749B72C2D851C18001F5673 /* HEICModifierError.swift */,
@@ -214,6 +217,7 @@
 				1749B73C2D851C18001F5673 /* AVISFileWrapper.swift in Sources */,
 				1749B73D2D851C18001F5673 /* AnimatedImageImportable.swift in Sources */,
 				1749B73E2D851C18001F5673 /* ImageInputView.swift in Sources */,
+				172355A32D855E0700E8A056 /* ZoomableModifier.swift in Sources */,
 				1749B73F2D851C18001F5673 /* InfiniteAnimationImageView.swift in Sources */,
 				1749B7402D851C18001F5673 /* AnimatedImageItemProtocol.swift in Sources */,
 				1749B7412D851C18001F5673 /* DetailSheetView.swift in Sources */,
