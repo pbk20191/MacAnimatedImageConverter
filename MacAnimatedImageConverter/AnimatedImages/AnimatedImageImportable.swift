@@ -32,7 +32,11 @@ struct AnimatedImageImportable: Transferable, Hashable {
         case .url(let uRL):
             return SentTransferredFile(uRL, allowAccessingOriginalFile: false)
         }
-        let fileName = suggestedFilename ?? "whatever"
+        let fileName = if #available(macOS 15.2, iOS 18.2, visionOS 2.2, tvOS 18.2, watchOS 11.2, *) {
+             suggestedFilename ?? "whatever"
+        } else {
+            "whatever"
+        }
         guard let fileNameExtension = animatedType.utType.preferredFilenameExtension else {
             throw TransferError.unsupportedFileType
         }

@@ -34,7 +34,11 @@ extension AnimatedImageItemProtocol {
                 return SentTransferredFile(url, allowAccessingOriginalFile: false)
             case .data(let data):
                 
-                let fileName = $0.suggestedFilename ?? "whatever"
+                let fileName = if #available(macOS 15.2, iOS 18.2, visionOS 2.2, tvOS 18.2, watchOS 11.2, *) {
+                     $0.suggestedFilename ?? "whatever"
+                } else {
+                    "whatever"
+                }
                 guard let fileNameExtension = uniformTypeIdentifier.preferredFilenameExtension else {
                     throw TransferError.unsupportedFileType
                 }
