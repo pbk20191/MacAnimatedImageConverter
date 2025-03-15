@@ -19,16 +19,19 @@ import ImageIO
 import CoreImage
 import UniformTypeIdentifiers
 import CoreMedia
-
+import Metal
+import VideoToolbox
 
 func transformToHEICS(
     cicontext:CIContext,
+    commandQueue:MTLCommandQueue,
+    bufferPool:CVPixelBufferPool,
+    texturePool:CVMetalTextureCache,
     imageSource:CGImageSource,
     memoryPool:CMMemoryPool,
     lossyCompressionQuality:Double? = nil,
     to identifier:String = "public.heics"
-) throws(HEICModifierError) -> Data {
-    
+) throws -> Data {
     let count = CGImageSourceGetCount(imageSource)
     let sourcePropKey:String
     let typeId = CGImageSourceGetType(imageSource) as String?
@@ -100,29 +103,53 @@ func transformToHEICS(
         throw HEICModifierError.failedToCreateDestination
     }
     CGImageDestinationSetProperties(destination, props as CFDictionary)
-
-    for index in 0..<count {
-        
-
+    let commandBuffer = commandQueue.makeCommandBuffer()!
+    let imageArray = try (0..<count).map { index in
         var ciImage = CIImage(cgImageSource: imageSource, index: index, options: [
             .applyOrientationProperty: true,
             .nearestSampling: false,
             .init(rawValue: "kCIImageExpandToHDR") :true,
         ]).premultiplyingAlpha()
+            
+        func flipImage(ciImage: CIImage) -> CIImage {
+            let transform = CGAffineTransform(scaleX: 1, y: -1) // Flip Y-axis
+                .translatedBy(x: 0, y: -ciImage.extent.height) // Shift back into view
 
-        let cgImage = cicontext.createCGImage(
-            ciImage,
-            from: ciImage.extent,
-            format: .BGRA8,
-            colorSpace: .init(name: CGColorSpace.extendedSRGB)
-        )!
+            return ciImage.transformed(by: transform)
+        }
+        ciImage = flipImage(ciImage: ciImage)
+        var pixelBuffer:CVPixelBuffer? = nil
+        var cvRet = CVPixelBufferPoolCreatePixelBuffer(nil, bufferPool, &pixelBuffer)
+        if cvRet != kCVReturnSuccess {
+            throw CoreVideoError(rawValue: cvRet)!
+        }
+        var texture:CVMetalTexture?
+        cvRet = CVMetalTextureCacheCreateTextureFromImage(nil, texturePool, pixelBuffer!, nil, .bgra8Unorm, Int(ciImage.extent.width), Int(ciImage.extent.height), 0, &texture)
+        if cvRet != kCVReturnSuccess {
+            throw CoreVideoError(rawValue: cvRet)!
+        }
+        commandBuffer.addCompletedHandler { [texture] _ in
+            withExtendedLifetime(texture, {})
+        }
+        let destination = CIRenderDestination(mtlTexture: CVMetalTextureGetTexture(texture!)!, commandBuffer: commandBuffer)
+        try cicontext.startTask(toRender: ciImage, to: destination)
+        return pixelBuffer!
+    }
+    commandBuffer.commit()
+    commandBuffer.waitUntilCompleted()
+    for index in 0..<count {
+        
+        let cvBuffer = imageArray[index]
+        var cgImage:CGImage? = nil
+        var retCode = VTCreateCGImageFromCVPixelBuffer(cvBuffer, options: nil, imageOut: &cgImage)
+        
         var prop = CGImageSourceCopyPropertiesAtIndex(imageSource, index, nil) as! [String: Any]
         var imageProp = prop[sourcePropKey] as! [String:Any]
         prop[sourcePropKey] = nil
         defer {
             prop[kCGImageDestinationLossyCompressionQuality as String] = lossyCompressionQuality
             prop[targetPropKey as String] = imageProp
-            CGImageDestinationAddImage(destination, cgImage, prop as CFDictionary)
+            CGImageDestinationAddImage(destination, cgImage!, prop as CFDictionary)
         }
 //        imageProp[kCGImagePropertyNamedColorSpace as String] = CGColorSpace.extendedDisplayP3
         if let metaData = CGImageSourceCopyMetadataAtIndex(imageSource, index, nil) {
@@ -137,7 +164,7 @@ func transformToHEICS(
         
         return data as Data
     }
-    throw .failedToCreateCopy
+    throw HEICModifierError.failedToCreateCopy
 }
 
 
@@ -148,4 +175,56 @@ enum HEICModifierError: Error {
     case failedToCreateDestination
     case invalidEntryStructure
     case failedToCreateCopy
+}
+
+
+struct CoreVideoError: RawRepresentable, Error {
+    
+    init?(rawValue: CVReturn) {
+        if rawValue == kCVReturnSuccess {
+            return nil
+        }
+        self.rawValue = rawValue
+    }
+    
+    var rawValue: CVReturn
+    
+    var localizedDescription: String {
+        switch rawValue {
+        case kCVReturnRetry:
+            return "kCVReturnRetry"
+        case kCVReturnUnsupported:
+            return "kCVReturnUnsupported"
+        case kCVReturnInvalidSize:
+            return "kCVReturnInvalidSize"
+        case kCVReturnInvalidDisplay:
+            return "kCVReturnInvalidDisplay"
+        case kCVReturnInvalidArgument:
+            return "kCVReturnInvalidArgument"
+        case kCVReturnAllocationFailed:
+            return "kCVReturnAllocationFailed"
+        case kCVReturnInvalidPixelFormat:
+            return "kCVReturnInvalidPixelFormat"
+        case kCVReturnPoolAllocationFailed:
+            return "kCVReturnPoolAllocationFailed"
+        case kCVReturnInvalidPoolAttributes:
+            return "kCVReturnInvalidPoolAttributes"
+        case kCVReturnDisplayLinkNotRunning:
+            return "kCVReturnDisplayLinkNotRunning"
+        case kCVReturnDisplayLinkAlreadyRunning:
+            return "kCVReturnDisplayLinkAlreadyRunning"
+        case kCVReturnInvalidPixelBufferAttributes:
+            return "kCVReturnInvalidPixelBufferAttributes"
+        case kCVReturnDisplayLinkCallbacksNotSet:
+            return "kCVReturnDisplayLinkCallbacksNotSet"
+        case kCVReturnWouldExceedAllocationThreshold:
+            return "kCVReturnWouldExceedAllocationThreshold"
+        case kCVReturnPixelBufferNotMetalCompatible:
+            return "kCVReturnPixelBufferNotMetalCompatible"
+        case kCVReturnPixelBufferNotOpenGLCompatible:
+            return "kCVReturnPixelBufferNotOpenGLCompatible"
+        default:
+            return "unknown CVReturn (\(rawValue))"
+        }
+    }
 }

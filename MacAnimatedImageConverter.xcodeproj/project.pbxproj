@@ -28,6 +28,7 @@
 		1749B7442D851C18001F5673 /* HEICSFileWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B7202D851C18001F5673 /* HEICSFileWrapper.swift */; };
 		1749B7452D851C18001F5673 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1749B7242D851C18001F5673 /* Preview Assets.xcassets */; };
 		1749B7462D851C18001F5673 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1749B7282D851C18001F5673 /* Assets.xcassets */; };
+		1749B7492D852037001F5673 /* SharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749B7482D852037001F5673 /* SharedModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		1749B72E2D851C18001F5673 /* ImageInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInputView.swift; sourceTree = "<group>"; };
 		1749B72F2D851C18001F5673 /* InfiniteAnimationImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteAnimationImageView.swift; sourceTree = "<group>"; };
 		1749B7302D851C18001F5673 /* ItemWrapperIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemWrapperIdentifier.swift; sourceTree = "<group>"; };
+		1749B7482D852037001F5673 /* SharedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				1749B72C2D851C18001F5673 /* HEICModifierError.swift */,
 				1749B72D2D851C18001F5673 /* ImageDropError.swift */,
 				1749B72E2D851C18001F5673 /* ImageInputView.swift */,
+				1749B7482D852037001F5673 /* SharedModel.swift */,
 				1749B72F2D851C18001F5673 /* InfiniteAnimationImageView.swift */,
 				1749B7302D851C18001F5673 /* ItemWrapperIdentifier.swift */,
 			);
@@ -205,6 +208,7 @@
 				1749B7332D851C18001F5673 /* SourceType.swift in Sources */,
 				1749B7342D851C18001F5673 /* ItemWrapperIdentifier.swift in Sources */,
 				1749B7352D851C18001F5673 /* APNGFileWrapper.swift in Sources */,
+				1749B7492D852037001F5673 /* SharedModel.swift in Sources */,
 				1749B7362D851C18001F5673 /* HEICModifierError.swift in Sources */,
 				1749B7372D851C18001F5673 /* WebPFileWrapper.swift in Sources */,
 				1749B7382D851C18001F5673 /* ContentView.swift in Sources */,

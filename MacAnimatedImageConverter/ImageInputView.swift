@@ -109,22 +109,33 @@ struct ImageDropView: View {
                         nil
                     }
                     guard let exportAs else { return }
+                    let imageSource:CGImageSource?
+                    switch image.content {
+                    case .data(let data):
+                        imageSource = CGImageSourceCreateWithData(data as CFData, nil)
+                    case .url(let uRL):
+                        imageSource = CGImageSourceCreateWithURL(uRL as CFURL, nil)
+                    }
+                    if let imageSource, let cgImage = CGImageSourceCreateImageAtIndex(imageSource, 0, nil) {
+                        self.model.ensureBufferPoolCapacity(width: cgImage.width, height: cgImage.height)
+
+                    }
+                    let commandqueue = model.commandqueue
+                    let bufferPool = model.bufferPool!
+                    let texturecache = model.metalTextureCache
                     Task.detached {
                         await MainActor.run {
                             processing = true
                         }
                         do {
                             
-                            let imageSource:CGImageSource?
-                            switch image.content {
-                            case .data(let data):
-                                imageSource = CGImageSourceCreateWithData(data as CFData, nil)
-                            case .url(let uRL):
-                                imageSource = CGImageSourceCreateWithURL(uRL as CFURL, nil)
-                            }
-                            
+
+
                             let data = try transformToHEICS(
                                 cicontext: cicontext,
+                                commandQueue: commandqueue,
+                                bufferPool:bufferPool,
+                                texturePool: texturecache,
                                 imageSource: imageSource!,
                                 memoryPool: memoryPool,
                                 lossyCompressionQuality: lossy,
@@ -192,32 +203,3 @@ struct ImageDropView: View {
  
  */
 
-@Observable
-class SharedModel {
-    
-    let pmaOnCiContext:CIContext
-    let pmaOffCiContext:CIContext
-    let memoryPool:CMMemoryPool
-    
-    
-    
-    init(pmaOnCiContext: CIContext, pmaOffCiContext: CIContext, memoryPool: CMMemoryPool) {
-        self.pmaOnCiContext = pmaOnCiContext
-        self.pmaOffCiContext = pmaOffCiContext
-        self.memoryPool = memoryPool
-    }
-    
-    init() {
-        self.pmaOffCiContext = CIContext(
-            options: [
-                .outputPremultiplied: false,
-            ]
-        )
-        self.pmaOnCiContext = CIContext(
-            options: [
-                .outputPremultiplied: true,
-            ]
-        )
-        self.memoryPool = CMMemoryPoolCreate(options: nil)
-    }
-}
