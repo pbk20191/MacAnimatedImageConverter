@@ -77,6 +77,7 @@ struct InfiniteAnimationImageView: View, Equatable {
         }.onDisappear {
             self.pausing = true
         }
+        .frame(idealWidth: .init(cgImage?.width ?? 1), idealHeight: .init( cgImage?.height ?? 1))
     }
 
     

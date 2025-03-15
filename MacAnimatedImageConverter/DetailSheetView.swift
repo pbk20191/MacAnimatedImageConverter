@@ -19,40 +19,30 @@ struct DetailSheetView: View {
         var point = UnitPoint.center
     }
     
-    @State private var dragExportEnabled = true
+//    @State private var dragExportEnabled = true
     var item:AnimatedImageImportable
     
     var body: some View {
         VStack {
-            if dragExportEnabled {
+//            if dragExportEnabled {
                 Text("Drag to Export")
-            } else {
-                Text("Zoom to magnify")
-            }
+//            } else {
+//                Text("Zoom to magnify")
+//            }
             Group {
                 
                 switch item.content {
                 case .data(let data):
                     InfiniteAnimationImageView(data: data, label: Text("Animated"))
-                        .fixedSize()
                 case .url(let url):
                     InfiniteAnimationImageView(url: url, label: Text("Animated"))
-                        .fixedSize()
                 }
             }
-            .zoomable(isEnabled: !dragExportEnabled)
-            .overlay {
-                if  dragExportEnabled {
-                    Color.white.opacity(0.01)
-                        .contentShape(Rectangle())
-                        .modifier(ExportAnimatedImageModifier(item: item))
-                }
-                
-            }
+            .modifier(ExportAnimatedImageModifier(item: item))
             HStack {
-                Button(dragExportEnabled ? "Enable Magnify" : "Enable Drag&Drop") {
-                    dragExportEnabled.toggle()
-                }
+//                Button(dragExportEnabled ? "Enable Magnify" : "Enable Drag&Drop") {
+//                    dragExportEnabled.toggle()
+//                }
                 Button("Close") {
                     dismiss()
                 }

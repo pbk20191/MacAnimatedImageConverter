@@ -159,7 +159,10 @@ struct ImageDropView: View {
             
             .sheet(item: $outputDetailItem) {
                 DetailSheetView(item: $0.item)
+                    .presentationSizing(.fitted)
+                    .frame(minWidth: 150, maxWidth: 1920, minHeight: 150, maxHeight: 1080)
             }
+           
 
  
         }
