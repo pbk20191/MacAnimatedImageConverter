@@ -214,6 +214,7 @@ class SharedModel {
         self.pmaOffCiContext = CIContext(
             options: [
                 .outputPremultiplied: false,
+                .workingColorSpace: CGColorSpace(name: CGColorSpace.coreMedia709)!,
             ]
         )
         self.pmaOnCiContext = CIContext(

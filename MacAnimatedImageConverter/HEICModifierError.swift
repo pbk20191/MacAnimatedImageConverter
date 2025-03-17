@@ -93,7 +93,7 @@ func transformToHEICS(
     let fileData:NSMutableData = CFDataCreateMutable(CMMemoryPoolGetAllocator(memoryPool), 0)
 //    let destionation
     guard let destination = CGImageDestinationCreateWithData(fileData, identifier as CFString, count, [
-        kCGImageDestinationOptimizeColorForSharing : false,
+        kCGImageDestinationOptimizeColorForSharing : true,
         kCGImageDestinationPreserveGainMap  : false,
         
     ] as CFDictionary) else {
