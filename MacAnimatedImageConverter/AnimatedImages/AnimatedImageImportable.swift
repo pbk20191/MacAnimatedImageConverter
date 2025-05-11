@@ -22,7 +22,7 @@ struct AnimatedImageImportable: Transferable, Hashable {
     
     var content:DataSourceType
     var animatedType:AnimatedType
-    
+    var suggestedFilename:String?
     
     func makeSentFile() async throws -> SentTransferredFile {
         let data:Data
@@ -59,7 +59,9 @@ struct AnimatedImageImportable: Transferable, Hashable {
 
         FileRepresentation(importedContentType: .png, shouldAttemptToOpenInPlace: true) {
             try Self.scanStatusFor(url: $0.file, kCGImagePropertyPNGDictionary as String)
-            return Self(content: .url($0.file), animatedType: .apng)
+            var a = Self(content: .url($0.file), animatedType: .apng)
+            a.suggestedFilename = $0.file.deletingPathExtension().lastPathComponent
+            return a
         }
         DataRepresentation(importedContentType: .png)  {
             try Self.scanStatusFor(data: $0, kCGImagePropertyPNGDictionary as String)
@@ -68,7 +70,9 @@ struct AnimatedImageImportable: Transferable, Hashable {
         FileRepresentation(importedContentType: .heics, shouldAttemptToOpenInPlace: true)  {
             try Self.scanStatusFor(url: $0.file, kCGImagePropertyHEICSDictionary as String)
 
-            return Self(content: .url($0.file), animatedType: .heics)
+            var a = Self(content: .url($0.file), animatedType: .heics)
+            a.suggestedFilename = $0.file.deletingPathExtension().lastPathComponent
+            return a
         }
         
         DataRepresentation(importedContentType: .heics) {
@@ -78,7 +82,9 @@ struct AnimatedImageImportable: Transferable, Hashable {
         FileRepresentation(importedContentType: .gif, shouldAttemptToOpenInPlace: true) {
             try Self.scanStatusFor(url: $0.file, kCGImagePropertyGIFDictionary as String)
 
-            return Self(content: .url($0.file), animatedType: .gif)
+            var a = Self(content: .url($0.file), animatedType: .gif)
+            a.suggestedFilename = $0.file.deletingPathExtension().lastPathComponent
+            return a
         }
         DataRepresentation(importedContentType: .gif)  {
             try Self.scanStatusFor(data: $0, kCGImagePropertyGIFDictionary as String)
@@ -88,7 +94,9 @@ struct AnimatedImageImportable: Transferable, Hashable {
         FileRepresentation(importedContentType: .webP, shouldAttemptToOpenInPlace: true) {
             try Self.scanStatusFor(url: $0.file, kCGImagePropertyWebPDictionary as String)
 
-            return Self(content: .url($0.file), animatedType: .webp)
+            var a = Self(content: .url($0.file), animatedType: .webp)
+            a.suggestedFilename = $0.file.deletingPathExtension().lastPathComponent
+            return a
         }
         DataRepresentation(importedContentType: .webP) {
             try Self.scanStatusFor(data: $0, kCGImagePropertyWebPDictionary as String)
@@ -97,7 +105,9 @@ struct AnimatedImageImportable: Transferable, Hashable {
         FileRepresentation(importedContentType: UTType("public.avif")!, shouldAttemptToOpenInPlace: true) {
             try Self.scanStatusFor(url: $0.file, kCGImagePropertyAVISDictionary as String)
 
-            return Self(content: .url($0.file), animatedType: .webp)
+            var a = Self(content: .url($0.file), animatedType: .webp)
+            a.suggestedFilename = $0.file.deletingPathExtension().lastPathComponent
+            return a
         }
         DataRepresentation(importedContentType: UTType("public.avif")!) {
             try Self.scanStatusFor(data: $0, kCGImagePropertyAVISDictionary as String)
@@ -141,9 +151,23 @@ struct AnimatedImageImportable: Transferable, Hashable {
 }
 
 
-enum TransferError:Error {
+enum TransferError:Error, LocalizedError {
     case unsupportedFileType
     case canNotCreateImageSource
     case imageDecodingFailed
     case notAnimatableImage
+    
+    
+    var errorDescription: String {
+        switch self {
+        case .unsupportedFileType:
+            return "Unsupported file type"
+        case .canNotCreateImageSource:
+            return "Can not create image source(ImageIO)"
+        case .imageDecodingFailed:
+            return "Image decoding failed)"
+        case .notAnimatableImage:
+            return "Not animatable image(Validation)"
+        }
+    }
 }

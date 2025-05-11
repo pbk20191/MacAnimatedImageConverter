@@ -1,5 +1,5 @@
 //
-//  ImageInputView.swift
+//  AnimatedImageDropView.swift
 //  PbkImageConverter
 //
 //  Created by 박병관 on 3/14/25.
@@ -15,7 +15,7 @@ import AVFoundation
 import Combine
 
 
-struct ImageDropView: View {
+struct AnimatedImageDropView: View {
     @State private var image: AnimatedImageImportable? = nil
     @State private var outputUrl:URL? = nil
     @State private var presentAlert = false
@@ -24,7 +24,7 @@ struct ImageDropView: View {
     @State private var outputDetailItem = ItemWrapperIdentifier?.none
     @State private var destinationIdentifer:UTType? = nil
     @State private var processing = false
-    @State private var model = SharedModel()
+    @Environment(SharedModel.self) private var model 
     
     let destinationTypes:[UTType] = [
         .heics, .png, .gif
@@ -194,33 +194,3 @@ struct ImageDropView: View {
  ["public.jpeg", "public.png", "com.compuserve.gif", "public.tiff", "public.jpeg-2000", "com.apple.atx", "org.khronos.ktx", "org.khronos.ktx2", "org.khronos.astc", "com.microsoft.dds", "public.heic", "public.heics", "com.microsoft.ico", "com.microsoft.bmp", "com.apple.icns", "com.adobe.photoshop-image", "com.adobe.pdf", "com.truevision.tga-image", "com.ilm.openexr-image", "public.pbm", "public.pvr"]
  
  */
-
-@Observable
-class SharedModel {
-    
-    let pmaOnCiContext:CIContext
-    let pmaOffCiContext:CIContext
-    let memoryPool:CMMemoryPool
-    
-    
-    
-    init(pmaOnCiContext: CIContext, pmaOffCiContext: CIContext, memoryPool: CMMemoryPool) {
-        self.pmaOnCiContext = pmaOnCiContext
-        self.pmaOffCiContext = pmaOffCiContext
-        self.memoryPool = memoryPool
-    }
-    
-    init() {
-        self.pmaOffCiContext = CIContext(
-            options: [
-                .outputPremultiplied: false,
-            ]
-        )
-        self.pmaOnCiContext = CIContext(
-            options: [
-                .outputPremultiplied: true,
-            ]
-        )
-        self.memoryPool = CMMemoryPoolCreate(options: nil)
-    }
-}

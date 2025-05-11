@@ -31,6 +31,7 @@ func transformToHEICS(
     
     let count = CGImageSourceGetCount(imageSource)
     let sourcePropKey:String
+    
     let typeId = CGImageSourceGetType(imageSource) as String?
     switch typeId {
     case "public.png":
@@ -49,13 +50,12 @@ func transformToHEICS(
         sourcePropKey = kCGImagePropertyTIFFDictionary as String
     case UTType.heif.identifier:
         sourcePropKey = kCGImagePropertyHEIFDictionary as String
+        
     default:
         throw HEICModifierError.unsupportedImageType
     }
     let targetPropKey:String
     switch identifier {
-    case "public.png":
-        targetPropKey = kCGImagePropertyPNGDictionary as String
     case "public.heics":
         targetPropKey = kCGImagePropertyHEICSDictionary as String
     case "public.avis", "public.avif":
@@ -70,7 +70,8 @@ func transformToHEICS(
         targetPropKey = kCGImagePropertyTIFFDictionary as String
     case UTType.heif.identifier:
         targetPropKey = kCGImagePropertyHEIFDictionary as String
-        
+    case UTType.heic.identifier:
+        targetPropKey = kCGImagePropertyHEICSDictionary as String
     default:
         throw HEICModifierError.unsupportedImageType
     }
@@ -86,7 +87,7 @@ func transformToHEICS(
 //    assert( CGImageMetadataSetTagWithPath(metaData, nil, "\(kCGImageMetadataPrefixTIFF as String):ThumbnailIndex" as CFString, tiffTag))
 //    CGImageMetadata
     var props = CGImageSourceCopyProperties(imageSource, nil) as! [String: Any]
-    props[kCGImagePropertyHEICSDictionary as String] = props[sourcePropKey]
+    props[targetPropKey] = props[sourcePropKey]
     props[sourcePropKey] = nil
 //    props[propKey]
 //    props[kCGImageTiff]
