@@ -22,7 +22,8 @@ struct StaticImagesDropView: View {
     @State private var lossyFactor = 0.5
     @State private var outputItems = ContiguousArray<ExportOnlyWrapper>()
     @State private var processing = false
-    @Environment(SharedModel.self) private var model 
+    @State private var exporting = false
+    @Environment(SharedModel.self) private var model
     
 
     var body: some View {
@@ -51,11 +52,9 @@ struct StaticImagesDropView: View {
                         images = []
                     }.disabled(processing)
                     
-                    if !outputItems.isEmpty {
-                        ShareLink("outputs ready", items: self.outputItems) { item in
-                            SharePreview("image", image: Image(nsImage: item.item.makePlatformImage()))
-                        }
-                    }
+                    Button("Export") {
+                        self.exporting = true
+                    }.disabled(outputItems.isEmpty)
                 }
             } header: {
                 Text("lossy compression config")
@@ -87,6 +86,82 @@ struct StaticImagesDropView: View {
                     
                     
                 }
+                Button  {
+                    let uttype = UTType.heic
+                    let snapShot = self.images
+                    if !snapShot.isEmpty {
+                        let memoryPool = model.memoryPool
+                        let lossy = self.lossyFactor
+                        let cicontext = model.pmaOffCiContext
+
+                        Task.detached {
+                            await MainActor.run {
+                                processing = true
+                            }
+                            do {
+                             
+                                let results = try await withThrowingTaskGroup(of: StaticHeicImageRep.self, returning: ContiguousArray<ExportOnlyWrapper>.self) { group in
+                                    for item in snapShot {
+                                        
+                                        let success = group.addTaskUnlessCancelled {
+                                            let imageSource:CGImageSource?
+                                            let names = item.item.suggestedFilename
+                                            switch item.item.content {
+                                            case .data(let data):
+                                                imageSource = CGImageSourceCreateWithData(data as CFData, nil)
+                                            case .url(let uRL):
+                                                imageSource = CGImageSourceCreateWithURL(uRL as CFURL, nil)
+                                            }
+                                           
+                                            let data = try transformToHEICS(
+                                                cicontext: cicontext,
+                                                imageSource: imageSource!,
+                                                memoryPool: memoryPool,
+                                                lossyCompressionQuality: lossy,
+                                                to: uttype.identifier
+                                            )
+                                            var item = StaticHeicImageRep.init(content: .data(data))
+                                            item.suggestedFilename = names
+                                            return item
+                                        }
+                                        if !success {
+                                            throw CancellationError()
+                                        }
+                                    }
+                                    var container = ContiguousArray<ExportOnlyWrapper>()
+                                    for try await data in group {
+  
+                                        container.append(
+                                            .init(item: data)
+                                        )
+                                    }
+                                    return container
+                                }
+                                await MainActor.run {
+                                    self.outputItems = results
+                                }
+                            } catch {
+                                await MainActor.run {
+                                    self.error = ImageDropError(innerError: error)
+                                    self.presentAlert = true
+                                }
+
+                            }
+                            await MainActor.run {
+                                processing = false
+                            }
+                        }
+                    }
+                } label: {
+                    if processing {
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                    } else {
+                        Text("Convert")
+                    }
+                }
+                .disabled(self.images.isEmpty || processing)
+                .padding()
             } else {
                 Text("output")
                 List($outputItems, id: \.id, editActions: .all) { $item in
@@ -101,79 +176,7 @@ struct StaticImagesDropView: View {
                 }
             }
 
-            Button  {
-                let uttype = UTType.heic
-                let snapShot = self.images
-                if !snapShot.isEmpty {
-                    let memoryPool = model.memoryPool
-                    let lossy = self.lossyFactor
-                    let cicontext = model.pmaOffCiContext
 
-                    Task.detached {
-                        await MainActor.run {
-                            processing = true
-                        }
-                        do {
-                         
-                            let results = try await withThrowingTaskGroup(of: Data.self, returning: ContiguousArray<ExportOnlyWrapper>.self) { group in
-                                for item in snapShot {
-                                    
-                                    let success = group.addTaskUnlessCancelled {
-                                        let imageSource:CGImageSource?
-                                        switch item.item.content {
-                                        case .data(let data):
-                                            imageSource = CGImageSourceCreateWithData(data as CFData, nil)
-                                        case .url(let uRL):
-                                            imageSource = CGImageSourceCreateWithURL(uRL as CFURL, nil)
-                                        }
-                                       
-                                        let data = try transformToHEICS(
-                                            cicontext: cicontext,
-                                            imageSource: imageSource!,
-                                            memoryPool: memoryPool,
-                                            lossyCompressionQuality: lossy,
-                                            to: uttype.identifier
-                                        )
-                                        return data
-                                    }
-                                    if !success {
-                                        throw CancellationError()
-                                    }
-                                }
-                                var container = ContiguousArray<ExportOnlyWrapper>()
-                                for try await data in group {
-                                    let item = StaticHeicImageRep.init(content: .data(data))
-                                    container.append(
-                                        ExportOnlyWrapper(item: item)
-                                    )
-                                }
-                                return container
-                            }
-                            await MainActor.run {
-                                self.outputItems = results
-                            }
-                        } catch {
-                            await MainActor.run {
-                                self.error = ImageDropError(innerError: error)
-                                self.presentAlert = true
-                            }
-
-                        }
-                        await MainActor.run {
-                            processing = false
-                        }
-                    }
-                }
-            } label: {
-                if processing {
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                } else {
-                    Text("Convert")
-                }
-            }
-            .disabled(self.images.isEmpty || processing)
-            .padding()
 
            
 
@@ -181,6 +184,15 @@ struct StaticImagesDropView: View {
         }
         .frame(width: 400)
     
+        .fileExporter(isPresented: $exporting, items: self.outputItems, contentTypes: [.heic]) { result in
+            switch result {
+            case .success:
+                break
+            case .failure(let error):
+                self.error = .init(innerError: error)
+                self.presentAlert = true
+            }
+        }
         .alert(isPresented: $presentAlert, error: error) {
             Button("ok") {
                 presentAlert = false
@@ -197,6 +209,10 @@ struct StaticImagesDropView: View {
         
         let id = UUID()
         
+        var suggestedFilename:String? {
+            item.suggestedFilename
+        }
+        
         static var transferRepresentation: some TransferRepresentation {
             ProxyRepresentation<Self, StaticHeicImageRep>
                 .init(exporting: \.item, importing: { .init(item: $0)})
@@ -208,6 +224,9 @@ struct StaticImagesDropView: View {
         let item:StaticImageImportable
         let id = UUID()
         
+        var suggestedFilename:String? {
+            item.suggestedFilename
+        }
         
         static var transferRepresentation: some TransferRepresentation {
             ProxyRepresentation<Self, StaticImageImportable>.init(exporting: \.item, importing: { .init(item: $0) })

@@ -26,11 +26,12 @@ struct StaticImageImportable: Transferable, Hashable {
         case .url(let uRL):
             return SentTransferredFile(uRL, allowAccessingOriginalFile: false)
         }
-        let fileName = if #available(macOS 15.2, iOS 18.2, visionOS 2.2, tvOS 18.2, watchOS 11.2, *) {
-             suggestedFilename ?? "whatever"
-        } else {
-            "whatever"
-        }
+        let fileName = suggestedFilename ?? "whatever"
+//        if #available(macOS 15.2, iOS 18.2, visionOS 2.2, tvOS 18.2, watchOS 11.2, *) {
+//             suggestedFilename ?? "whatever"
+//        } else {
+//            "whatever"
+//        }
         guard let fileNameExtension = uttype.preferredFilenameExtension else {
             throw TransferError.unsupportedFileType
         }
@@ -131,6 +132,7 @@ struct StaticHeicImageRep: Transferable, Hashable {
     
     
     var content:DataSourceType
+    var suggestedFilename:String?
 
     
     func makeSentFile() async throws -> SentTransferredFile {
@@ -141,11 +143,12 @@ struct StaticHeicImageRep: Transferable, Hashable {
         case .url(let uRL):
             return SentTransferredFile(uRL, allowAccessingOriginalFile: false)
         }
-        let fileName = if #available(macOS 15.2, iOS 18.2, visionOS 2.2, tvOS 18.2, watchOS 11.2, *) {
-             suggestedFilename ?? "whatever"
-        } else {
-            "whatever"
-        }
+        let fileName = suggestedFilename ?? "whatever"
+//        if #available(macOS 15.2, iOS 18.2, visionOS 2.2, tvOS 18.2, watchOS 11.2, *) {
+//             suggestedFilename ?? "whatever"
+//        } else {
+//            "whatever"
+//        }
         guard let fileNameExtension = UTType.heic.preferredFilenameExtension else {
             throw TransferError.unsupportedFileType
         }
